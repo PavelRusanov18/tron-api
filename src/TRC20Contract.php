@@ -319,6 +319,21 @@ class TRC20Contract
         return $this->_tron->getManager()
             ->request("v1/accounts/{$address}/transactions/trc20?limit={$limit}&contract_address={$this->contractAddress}", [], 'get');
     }
+	
+	    /**
+     *  TRC20 confirmed transactions
+     *
+     * @param string $address
+     * @param int $limit
+     * @return array
+     *
+     * @throws TronException
+     */
+    public function getConfirmedTransactions(string $address, int $limit = 100): array
+    {
+        return $this->_tron->getManager()
+            ->request("v1/accounts/{$address}/transactions/trc20?limit={$limit}&contract_address={$this->contractAddress}&only_confirmed=true", [], 'get');
+    }
 
     /**
      * Get transaction info by contract address
